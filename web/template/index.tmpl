@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/x-icon" href="https://go.dev/favicon.ico">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+		<title>Go</title>
+	</head>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		html {
+			height: 100%;
+			background-image: linear-gradient(to bottom, #00a29c, #00a6ac, #00a9bc, #00abcb, #00add8);
+			font-family: 'Inter', sans-serif;
+			font-family: 'Work Sans', sans-serif;
+		}
+		body { 
+			margin: 0; 
+			height: 100vh;
+		}
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-weight: 600;
+		}
+		@media (min-width: 768px) { 
+			#api-title {
+					font-size: 4.5rem; /* 72px */
+					line-height: 1;
+					letter-spacing: -0.025em;
+					opacity: 0.8;
+			}
+			#version {
+					font-size: 1.5rem; /* 24px */
+					line-height: 2rem; /* 32px */
+			}
+		}
+	</style>
+	<body>
+		<div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+			<span style="text-align: center;">
+				<h1 id="api-title" style="color: white; margin: 0;">You're using Go!</h1>
+				<img src="https://go.dev/images/gophers/biplane.svg" alt="gopher-biplane" loading="lazy" style="width: 100%;">
+				<p id="version" style="color: white; margin-bottom: 0; margin-top: 1.5rem;">Go version: {{ .runtimeVersion }}</p>
+			</span>
+		</div>
+	</body>
+</html>
