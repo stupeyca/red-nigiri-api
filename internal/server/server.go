@@ -27,7 +27,7 @@ func NewServer() *http.Server {
 		migrate: runMigrations(),
 	}
 
-	// Declare Server config
+	// Declare Server config.
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", NewServer.port),
 		Handler:      NewServer.RegisterRoutes(),

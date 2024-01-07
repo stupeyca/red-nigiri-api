@@ -12,7 +12,12 @@ func (s *Server) RegisterRoutes() http.Handler {
 	router := gin.Default()
 	router.LoadHTMLGlob("web/template/*")
 	router.GET("/", s.IndexHandler)
-	router.GET("/sign-up", controller.SignUp)
+
+	apiRoutes := router.Group("/api")
+
+	publicRoutes := apiRoutes.Group("/auth")
+	publicRoutes.POST("/sign-up", controller.SignUp)
+	publicRoutes.POST("/sign-in", controller.SignIn)
 
 	return router
 }

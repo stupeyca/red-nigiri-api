@@ -24,6 +24,7 @@ type User struct {
 	Password  string `gorm:"size:255;not null;" json:"-"`
 }
 
+// Add `Create` to `User` struct.
 func (user *User) Create() (*User, error) {
 	err := database.DB.Create(&user).Error
 	if err != nil {
@@ -32,7 +33,8 @@ func (user *User) Create() (*User, error) {
 	return user, nil
 }
 
-func (user *User) HashPassword(*gorm.DB) error {
+// Add `BeforeCreate` to `User` struct.
+func (user *User) BeforeCreate(*gorm.DB) error {
 	hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
@@ -40,4 +42,20 @@ func (user *User) HashPassword(*gorm.DB) error {
 	user.Password = string(hash)
 	user.Email = string(user.Email)
 	return nil
+}
+
+// Add `isPasswordValid` to `User` struct. Compare the raw password sent by the user and the hashed one saved in DB.
+func (user *User) IsPasswordValid(password string) error {
+	return bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+}
+
+func FindUserByEmail(email string) (User, error) {
+	var user User
+	err := database.DB.Where("Email = ?", email).First(&user).Error
+
+	if err != nil {
+		return User{}, err
+	}
+
+	return user, nil
 }
